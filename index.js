@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 //What else?
 
 // An array of questions for user input
+//How do I get from question 5 to question 6 or 10 or 13, and back to question 5?
 const questions = [
     {
         type: 'input',
@@ -87,9 +88,9 @@ function init() {
 }
 
 // Function to generate HTML
+// Is this where I put it?
 function generateHtml(data) {
-    return `# ${data}
-
+    return `${data}
   `;
 }
 
