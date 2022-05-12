@@ -4,13 +4,15 @@ const renderTemplate = require('./src/pageTemplate.js');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
-//read docs on path
+
+//path module provides functionality to access and interact with the file system
+//https://nodejs.dev/learn/the-nodejs-path-module
 const path = require('path');
 
+//additional variables
 const teamMembers = [];
 
-// An array of questions for user input
-//How do I get from question 5 to question 6 or 10 or 13, and back to question 5?
+// An array of manager questions for user input
 const managerQuestions = [
     {
         type: 'input',
@@ -34,6 +36,7 @@ const managerQuestions = [
     },
 ];
 
+// An array of engineer questions for user input
 const engineerQuestions = [
     {
         type: 'input',
@@ -57,6 +60,7 @@ const engineerQuestions = [
     },
 ];
 
+//// An array of intern questions for user input
 const internQuestions = [
     {
         type: 'input',
@@ -80,8 +84,8 @@ const internQuestions = [
     },
 ];
 
-// Function to initialize app
-function init() {
+// Function to build manager profile
+function buildManager() {
     inquirer.prompt(managerQuestions).then((data) => {
         console.log(data)
         const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber)
@@ -92,6 +96,8 @@ function init() {
     });
 }
 
+// Function to ask menu question, engineer questions, intern questions, and complete iteration.
+//How do I get questions to cycle until complete?
 function getMenu() {
     inquirer.prompt(
         {
@@ -102,17 +108,20 @@ function getMenu() {
         }
     ).then((data) => {
         console.log(data)
-        if(data.employeetype === 'engineer') {
+        if (data.employeetype === 'engineer') {
             console.log('buildingEngineer')
             buildEngineer();
+            //finish
         }
-        if(data.employeetype === 'intern') {
+        if (data.employeetype === 'intern') {
             console.log('buildingIntern')
             buildIntern();
+            //finish
         }
-        if(data.employeetype === 'no') {
+        if (data.employeetype === 'no') {
             console.log('buildingTeam')
             buildTeam();
+            //finish
         }
     }
     )
@@ -130,4 +139,4 @@ function buildEngineer() {
 //module.exports = generateHTML;
 
 // Function call to initialize app
-init();
+buildManager();
