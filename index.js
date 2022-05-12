@@ -14,7 +14,7 @@ const Intern = require('./lib/Intern');
 //https://nodejs.dev/learn/the-nodejs-path-module
 const path = require('path');
 
-//additional variables
+//Team array for generated HTML
 const teamMembers = [];
 
 // An array of manager questions for user input
@@ -45,52 +45,52 @@ const managerQuestions = [
 const engineerQuestions = [
     {
         type: 'input',
-        name: 'engineername',
+        name: 'engineerName',
         message: 'What is the name of your engineer?',
     },
     {
         type: 'input',
-        name: 'engineeremployeeid',
+        name: 'engineerEmployeeid',
         message: 'What is the employee id of your engineer?',
     },
     {
         type: 'input',
-        name: 'engineeremail',
+        name: 'engineerEmail',
         message: 'What is the email address of your engineer?',
     },
     {
         type: 'input',
-        name: 'engineergithub',
+        name: 'engineerGithub',
         message: 'What is the GitHub username of your engineer?',
     },
 ];
 
-//// An array of intern questions for user input
+// An array of intern questions for user input
 const internQuestions = [
     {
         type: 'input',
-        name: 'internname',
+        name: 'internName',
         message: 'What is the name of your intern?',
     },
     {
         type: 'input',
-        name: 'internemployeeid',
+        name: 'internEmployeeid',
         message: 'What is the employee id of your intern?',
     },
     {
         type: 'input',
-        name: 'internemail',
+        name: 'internEmail',
         message: 'What is the email address of your intern?',
     },
     {
         type: 'input',
-        name: 'internschool',
+        name: 'internSchool',
         message: 'What school does your intern currently attend?',
     },
 ];
 
 // Function to build manager profile
-function buildManager() {
+function init() {
     inquirer.prompt(managerQuestions).then((data) => {
         console.log(data)
         const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber)
@@ -101,7 +101,31 @@ function buildManager() {
     });
 }
 
-// Function to ask menu question, engineer questions, intern questions, and complete iteration.
+// Function to build engineer profile
+function buildEngineer() {
+    inquirer.prompt(engineerQuestions).then((data) => {
+        console.log(data)
+        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, data.engineerGithub)
+        console.log(engineer)
+        teamMembers.push(engineer)
+        console.log(teamMembers)
+        getMenu()
+    });
+}
+
+// Function to build intern profile
+function buildIntern() {
+    inquirer.prompt(internQuestions).then((data) => {
+        console.log(data)
+        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, data.internSchool)
+        console.log(intern)
+        teamMembers.push(intern)
+        console.log(teamMembers)
+        getMenu()
+    });
+}
+
+// Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
 //How do I get questions to cycle until complete?
 function getMenu() {
     inquirer.prompt(
@@ -115,13 +139,12 @@ function getMenu() {
         console.log(data)
         if (data.employeetype === 'engineer') {
             console.log('buildingEngineer')
-            buildEngineer();
-            //finish
+            buildEngineer()
         }
         if (data.employeetype === 'intern') {
             console.log('buildingIntern')
             buildIntern();
-            //finish
+
         }
         if (data.employeetype === 'no') {
             console.log('buildingTeam')
@@ -131,17 +154,6 @@ function getMenu() {
     }
     )
 }
-function buildEngineer() {
-    console.log('buildingEngineer')
-}
-// Function to generate HTML
-// Is this where I put it?
-// function generateHtml(data) {
-//     return `${data}
-//   `;
-// }
-
-//module.exports = generateHTML;
 
 // Function call to initialize app
-buildManager();
+init();
