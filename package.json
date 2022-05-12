@@ -1,12 +1,12 @@
 {
-    "name": "01-stu_tdd-dissect",
+    "name": "teamprofilegen",
     "version": "1.0.0",
-    "description": "",
+    "description": "project to create team profile generator",
     "main": "index.js",
     "scripts": {
         "test": "jest"
     },
-    "author": "",
+    "author": "Matthew Estes",
     "license": "ISC",
     "devDependencies": {
         "jest": "^24.9.0"

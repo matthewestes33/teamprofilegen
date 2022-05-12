@@ -1,6 +1,11 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
+const fs = require('fs'); 
+
+// Link to page creation
 const renderTemplate = require('./src/pageTemplate.js');
+
+// Team profiles
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
