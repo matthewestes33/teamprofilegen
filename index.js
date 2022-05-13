@@ -10,10 +10,6 @@ const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
-//path module provides functionality to access and interact with the file system
-//https://nodejs.dev/learn/the-nodejs-path-module
-const path = require('path');
-
 //Team array for generated HTML
 const teamMembers = [];
 
@@ -124,20 +120,23 @@ function buildIntern() {
         getMenu();
     });
 
-    // function to generate HTML page file using file system 
-    // needs tinkering?
-    const output = buildTeam(data);
-    fs.writeFile('./dist/index.html', output, err => {
+
+};
+
+// function to generate HTML page file using file system 
+// needs tinkering?
+const buildTeam = (data) => {
+    fs.writeFile('./dist/index.html', data, err => {
         // if there is an error 
         if (err) {
             console.log(err);
             return;
             // when the profile has been created 
         } else {
-            console.log("Your team profile has been successfully created! Please check out the index.html")
+            console.log("Your team profile has been successfully created! Please check out the index.html");
         }
     })
-};
+}
 
 // Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
 // error
@@ -155,11 +154,11 @@ function getMenu() {
             console.log('buildingEngineer');
             buildEngineer();
         }
-        if (data.employeetype === 'intern') {
+        else if (data.employeetype === 'intern') {
             console.log('buildingIntern');
             buildIntern();
         }
-        if (data.employeetype === 'no') {
+        else {
             console.log('buildingTeam');
             buildTeam();
         }
@@ -169,6 +168,3 @@ function getMenu() {
 
 // Function call to initialize app
 init();
-
-// Add a static middleware for serving assets in the public folder?
-//app.use(express.static('public'));
