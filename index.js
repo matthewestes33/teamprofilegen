@@ -119,8 +119,6 @@ function buildIntern() {
         console.log(teamMembers);
         getMenu();
     });
-
-
 };
 
 // function to generate HTML page file using file system 
@@ -139,8 +137,9 @@ const buildTeam = (data) => {
 }
 
 // Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
-// error
-function getMenu() {
+
+const getMenu = () => {
+    console.log(`Let's build the manager's team!`);
     inquirer.prompt(
         {
             type: 'list',
@@ -160,7 +159,7 @@ function getMenu() {
         }
         else {
             console.log('buildingTeam');
-            buildTeam();
+            buildTeam(JSON.stringify(teamMembers));
         }
     }
     )
@@ -168,3 +167,4 @@ function getMenu() {
 
 // Function call to initialize app
 init();
+
