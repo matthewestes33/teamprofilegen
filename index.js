@@ -1,6 +1,6 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
-const fs = require('fs'); 
+const fs = require('fs');
 
 // Link to page creation
 const renderTemplate = require('./src/pageTemplate.js');
@@ -92,41 +92,55 @@ const internQuestions = [
 // Function to build manager profile
 function init() {
     inquirer.prompt(managerQuestions).then((data) => {
-        console.log(data)
-        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber)
-        console.log(manager)
-        teamMembers.push(manager)
-        console.log(teamMembers)
-        getMenu()
+        console.log(data);
+        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber);
+        console.log(manager);
+        teamMembers.push(manager);
+        console.log(teamMembers);
+        getMenu();
     });
 }
 
 // Function to build engineer profile
 function buildEngineer() {
     inquirer.prompt(engineerQuestions).then((data) => {
-        console.log(data)
-        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, data.engineerGithub)
-        console.log(engineer)
-        teamMembers.push(engineer)
-        console.log(teamMembers)
-        getMenu()
+        console.log(data);
+        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, data.engineerGithub);
+        console.log(engineer);
+        teamMembers.push(engineer);
+        console.log(teamMembers);
+        getMenu();
     });
 }
 
 // Function to build intern profile
 function buildIntern() {
     inquirer.prompt(internQuestions).then((data) => {
-        console.log(data)
-        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, data.internSchool)
-        console.log(intern)
-        teamMembers.push(intern)
-        console.log(teamMembers)
-        getMenu()
+        console.log(data);
+        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, data.internSchool);
+        console.log(intern);
+        teamMembers.push(intern);
+        console.log(teamMembers);
+        getMenu();
     });
-}
+
+    // function to generate HTML page file using file system 
+    // needs tinkering?
+    const output = buildTeam(data);
+    fs.writeFile('./dist/index.html', output, err => {
+        // if there is an error 
+        if (err) {
+            console.log(err);
+            return;
+            // when the profile has been created 
+        } else {
+            console.log("Your team profile has been successfully created! Please check out the index.html")
+        }
+    })
+};
 
 // Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
-//How do I get questions to cycle until complete?
+// error
 function getMenu() {
     inquirer.prompt(
         {
@@ -138,22 +152,23 @@ function getMenu() {
     ).then((data) => {
         console.log(data)
         if (data.employeetype === 'engineer') {
-            console.log('buildingEngineer')
-            buildEngineer()
+            console.log('buildingEngineer');
+            buildEngineer();
         }
         if (data.employeetype === 'intern') {
-            console.log('buildingIntern')
+            console.log('buildingIntern');
             buildIntern();
-
         }
         if (data.employeetype === 'no') {
-            console.log('buildingTeam')
+            console.log('buildingTeam');
             buildTeam();
-            //finish
         }
     }
     )
-}
+};
 
 // Function call to initialize app
 init();
+
+// Add a static middleware for serving assets in the public folder?
+//app.use(express.static('public'));
