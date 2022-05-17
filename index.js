@@ -1,4 +1,4 @@
-// Packages needed for this application
+// npm packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -10,7 +10,7 @@ const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 
-//Team array for generated HTML
+// Team array for generated HTML
 const teamMembers = [];
 
 // An array of manager questions for user input
@@ -85,14 +85,11 @@ const internQuestions = [
     },
 ];
 
-// Function to build manager profile
+// Function to initialize questions and build manager profile
 function buildManager() {
     inquirer.prompt(managerQuestions).then((data) => {
-        console.log(data);
         const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, "manager", data.managerOfficenumber);
-        console.log(manager);
         teamMembers.push(manager);
-        console.log(teamMembers);
         getMenu();
     });
 }
@@ -100,11 +97,8 @@ function buildManager() {
 // Function to build engineer profile
 function buildEngineer() {
     inquirer.prompt(engineerQuestions).then((data) => {
-        console.log(data);
         const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, "engineer", data.engineerGithub);
-        console.log(engineer);
         teamMembers.push(engineer);
-        console.log(teamMembers);
         getMenu();
     });
 }
@@ -112,18 +106,14 @@ function buildEngineer() {
 // Function to build intern profile
 function buildIntern() {
     inquirer.prompt(internQuestions).then((data) => {
-        console.log(data);
         const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, "intern", data.internSchool);
-        console.log(intern);
         teamMembers.push(intern);
-        console.log(teamMembers);
         getMenu();
     });
 };
 
-// function to generate HTML page file using file system 
+// Function to generate HTML page file using file system 
 const writeIndexHTML = (HTMLstring) => {
-    console.log(HTMLstring);
 fs.writeFile('./dist/index.html', HTMLstring, err => {
     // if there is an error 
     if (err) {
@@ -136,7 +126,6 @@ fs.writeFile('./dist/index.html', HTMLstring, err => {
 })}
 
 // Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
-
 const getMenu = () => {
     console.log(`Let's build the manager's team!`);
     inquirer.prompt(
@@ -147,7 +136,6 @@ const getMenu = () => {
             choices: ['engineer', 'intern', 'no']
         }
     ).then((data) => {
-        console.log(data)
         if (data.employeetype === 'engineer') {
             console.log('buildingEngineer');
             buildEngineer();

@@ -1,6 +1,5 @@
-// function to generate html by parsing JSON array
+// function to generate index.html by parsing JSON array
 function pageTemplate(data) {
-    console.log(data)
     const convertedData = JSON.parse(data)
     return `
 <!DOCTYPE html>
