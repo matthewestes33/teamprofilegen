@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // Link to page creation
-const renderTemplate = require('./src/pageTemplate.js');
+const pageTemplate = require('./src/pageTemplate.js');
 
 // Team profiles
 const Engineer = require('./lib/Engineer');
@@ -86,10 +86,10 @@ const internQuestions = [
 ];
 
 // Function to build manager profile
-function init() {
+function buildManager() {
     inquirer.prompt(managerQuestions).then((data) => {
         console.log(data);
-        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber);
+        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, "manager", data.managerOfficenumber);
         console.log(manager);
         teamMembers.push(manager);
         console.log(teamMembers);
@@ -101,7 +101,7 @@ function init() {
 function buildEngineer() {
     inquirer.prompt(engineerQuestions).then((data) => {
         console.log(data);
-        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, data.engineerGithub);
+        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, "engineer", data.engineerGithub);
         console.log(engineer);
         teamMembers.push(engineer);
         console.log(teamMembers);
@@ -113,7 +113,7 @@ function buildEngineer() {
 function buildIntern() {
     inquirer.prompt(internQuestions).then((data) => {
         console.log(data);
-        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, data.internSchool);
+        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, "intern", data.internSchool);
         console.log(intern);
         teamMembers.push(intern);
         console.log(teamMembers);
@@ -122,19 +122,18 @@ function buildIntern() {
 };
 
 // function to generate HTML page file using file system 
-// needs tinkering?
-const buildTeam = (data) => {
-    fs.writeFile('./dist/index.html', data, err => {
-        // if there is an error 
-        if (err) {
-            console.log(err);
-            return;
-            // when the profile has been created 
-        } else {
-            console.log("Your team profile has been successfully created! Please check out the index.html");
-        }
-    })
-}
+const writeIndexHTML = (HTMLstring) => {
+    console.log(HTMLstring);
+fs.writeFile('./dist/index.html', HTMLstring, err => {
+    // if there is an error 
+    if (err) {
+        console.log(err);
+        return;
+        // when the profile has been created 
+    } else {
+        console.log("Your team profile has been successfully created! Please check out the index.html");
+    }
+})}
 
 // Function to ask menu question, build engineer profile, build intern profile, and complete iteration.
 
@@ -159,12 +158,13 @@ const getMenu = () => {
         }
         else {
             console.log('buildingTeam');
-            buildTeam(JSON.stringify(teamMembers));
+            let writingFile = pageTemplate(JSON.stringify(teamMembers));
+            writeIndexHTML(writingFile);
         }
     }
     )
 };
 
 // Function call to initialize app
-init();
+buildManager();
 

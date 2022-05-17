@@ -1,14 +1,11 @@
-* {
-    box-sizing: border-box;
-}
 
 :root {
-    --primary: rgb(125, 145, 165);
+    --primary: darkblue;
     --secondary: white;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 #navbar {
@@ -16,11 +13,6 @@ body {
     color: var(--secondary);
     font-size: 50px;
 }
-
-.navbar-brand {
-    font-size: 50px;
-}
-
 
 .card-header {
     background-color: var(--primary);
