@@ -12,7 +12,7 @@ This application allows managers or human resources personnel to generate a webp
 
 This application requires installation of Node.js, and npm modules fs, inquirer, and jest. 
 
-The weather dashboard is here: https://matthewestes33.github.io/teamprofilegen/
+A sample HTML page can be found here: https://matthewestes33.github.io/teamprofilegen/
 
 All elements of the project can be examined here: https://github.com/matthewestes33/teamprofilegen/
 
