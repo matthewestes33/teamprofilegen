@@ -88,7 +88,7 @@ const internQuestions = [
 // Function to initialize questions and build manager profile
 function buildManager() {
     inquirer.prompt(managerQuestions).then((data) => {
-        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, "manager", data.managerOfficenumber);
+        const manager = new Manager(data.managerName, data.managerEmployeeid, data.managerEmail, data.managerOfficenumber);
         teamMembers.push(manager);
         getMenu();
     });
@@ -97,7 +97,7 @@ function buildManager() {
 // Function to build engineer profile
 function buildEngineer() {
     inquirer.prompt(engineerQuestions).then((data) => {
-        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, "engineer", data.engineerGithub);
+        const engineer = new Engineer(data.engineerName, data.engineerEmployeeid, data.engineerEmail, data.engineerGithub);
         teamMembers.push(engineer);
         getMenu();
     });
@@ -106,7 +106,7 @@ function buildEngineer() {
 // Function to build intern profile
 function buildIntern() {
     inquirer.prompt(internQuestions).then((data) => {
-        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, "intern", data.internSchool);
+        const intern = new Intern(data.internName, data.internEmployeeid, data.internEmail, data.internSchool);
         teamMembers.push(intern);
         getMenu();
     });
