@@ -6,7 +6,7 @@ This application allows managers or human resources personnel to generate a webp
 
 ## Mock-up
 
-![Team Profile Generator.](./images/.jpg)
+![Team Profile Generator.](./images/tpg.jpg)
 
 ## Installation
 
